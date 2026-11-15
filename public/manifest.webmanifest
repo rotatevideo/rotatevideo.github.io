@@ -1,0 +1,20 @@
+{
+  "name": "Rotate Video Online — Free Browser Video Rotator",
+  "short_name": "RotateVideo",
+  "description": "Rotate video online free (90°, 180°, 270°, Flip Horizontal & Vertical) 100% in your browser with zero server uploads and offline PWA support.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F1F0E8",
+  "theme_color": "#96B6C5",
+  "categories": ["multimedia", "video", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

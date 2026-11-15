@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://rotatevideo.github.io/sitemap.xml
+Sitemap: https://rotatevideo.github.io/sitemap-index.xml

@@ -1,0 +1,471 @@
+---
+import { SUPPORTED_LANGUAGES } from '../i18n/translations';
+---
+
+<header class="sticky top-0 z-40 w-full bg-[#F1F0E8]/95 dark:bg-[#182026]/95 backdrop-blur-md border-b-2 border-[#ADC4CE] dark:border-[#222D35] transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
+    <!-- Brand Logo + Title -->
+    <a
+      href="/"
+      class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#96B6C5] rounded-xl p-1"
+      aria-label="RotateVideo — Rotate Video Online Free Home"
+    >
+      <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#96B6C5] border-2 border-[#1E293B] dark:border-[#ADC4CE] flex items-center justify-center shadow-sm group-hover:rotate-90 transition-transform duration-500 ease-out shrink-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#1E293B"
+          stroke-width="2.25"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+          <path d="M21 3v5h-5" />
+          <polygon points="10 9 15 12 10 15 10 9" fill="#1E293B" />
+        </svg>
+      </div>
+      <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#1E293B] dark:text-[#F1F0E8]">
+        RotateVideo
+      </span>
+    </a>
+
+    <!-- DESKTOP NAVIGATION (lg and up) -->
+    <nav aria-label="Main Navigation" class="hidden lg:flex items-center gap-2.5">
+      <!-- 1. Language Selector Dropdown (8 Languages) -->
+      <div class="relative flex items-center">
+        <label for="language-select" class="sr-only" data-i18n="nav_lang_label">
+          Select Language
+        </label>
+        <div
+          class="relative flex items-center justify-center min-h-[44px] px-3.5 py-2 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] border-2 border-[#ADC4CE] hover:border-[#96B6C5] text-[#1E293B] dark:text-[#F1F0E8] font-semibold text-sm transition-colors cursor-pointer"
+          title="Select Language (8 Languages)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="shrink-0 pointer-events-none"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
+          </svg>
+          <span
+            id="current-lang-label"
+            class="ml-2 mr-5 pointer-events-none whitespace-nowrap"
+          >
+            English
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="absolute right-2.5 pointer-events-none"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+          <select
+            id="language-select"
+            aria-label="Select Language"
+            class="lang-select-control absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          >
+            {
+              SUPPORTED_LANGUAGES.map((lang) => (
+                <option value={lang.code} class="bg-[#F1F0E8] dark:bg-[#222D35] text-[#1E293B] dark:text-[#F1F0E8]">
+                  {lang.name}
+                </option>
+              ))
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- 2. 'Add to Home Screen' (PWA Offline Install Button) -->
+      <button
+        type="button"
+        id="pwa-install-btn"
+        aria-label="Add to Home Screen (Install Offline App)"
+        data-i18n-title="nav_install_pwa_tooltip"
+        title="Install app to rotate videos 100% offline"
+        class="pwa-install-trigger flex items-center justify-center gap-2 min-h-[44px] px-4 py-2 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] font-bold text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#96B6C5]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="shrink-0"
+          aria-hidden="true"
+        >
+          <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+          <path d="M12 18h.01" />
+          <path d="M12 8v6" />
+          <path d="m9 11 3 3 3-3" />
+        </svg>
+        <span class="whitespace-nowrap" data-i18n="nav_install_pwa">
+          Add to Home Screen
+        </span>
+      </button>
+
+      <!-- 3. 'Support the Developer' Button -->
+      <a
+        href="https://kisharadilshan.gumroad.com/coffee"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Support the Developer on Gumroad"
+        data-i18n-title="nav_support_tooltip"
+        title="Buy the developer a coffee on Gumroad"
+        class="flex items-center justify-center gap-2 min-h-[44px] px-4 py-2 rounded-xl bg-[#96B6C5] hover:bg-[#ADC4CE] border-2 border-[#1E293B]/20 dark:border-[#ADC4CE] text-[#1E293B] font-bold text-sm transition-colors shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1E293B]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="shrink-0"
+          aria-hidden="true"
+        >
+          <path d="M10 2v2" />
+          <path d="M14 2v2" />
+          <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
+          <path d="M6 2v2" />
+        </svg>
+        <span class="whitespace-nowrap" data-i18n="nav_support">
+          Support the Developer
+        </span>
+      </a>
+
+      <!-- 4. Light / Dark Mode Toggle Button -->
+      <button
+        type="button"
+        id="theme-toggle-btn"
+        aria-label="Toggle Light or Dark Mode"
+        data-i18n-title="nav_theme_toggle"
+        title="Toggle Light / Dark theme"
+        class="theme-toggle-trigger flex items-center justify-center min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#96B6C5]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="hidden dark:block shrink-0"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="m4.93 4.93 1.41 1.41" />
+          <path d="m17.66 17.66 1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="m6.34 17.66-1.41 1.41" />
+          <path d="m19.07 4.93-1.41 1.41" />
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="block dark:hidden shrink-0"
+          aria-hidden="true"
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </svg>
+      </button>
+
+      <!-- 5. GitHub Repository Link (Clean GitHub SVG Icon ONLY) -->
+      <a
+        href="https://github.com/rotatevideo/rotatevideo.github.io"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="View RotateVideo Source Code on GitHub"
+        data-i18n-title="nav_github_tooltip"
+        title="View source code on GitHub"
+        class="flex items-center justify-center min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#96B6C5]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="shrink-0"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          />
+        </svg>
+      </a>
+    </nav>
+
+    <!-- MOBILE & TABLET TOGGLE ICON BUTTON (< lg) -->
+    <div class="flex lg:hidden items-center">
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu-panel"
+        class="flex items-center justify-center min-w-[46px] min-h-[46px] p-2.5 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#96B6C5] text-[#1E293B] dark:text-[#F1F0E8] border-2 border-[#ADC4CE] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#96B6C5]"
+      >
+        <!-- Hamburger Icon -->
+        <svg
+          id="mobile-menu-icon-open"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="4" x2="20" y1="6" y2="6" />
+          <line x1="4" x2="20" y1="12" y2="12" />
+          <line x1="4" x2="20" y1="18" y2="18" />
+        </svg>
+        <!-- Close (X) Icon -->
+        <svg
+          id="mobile-menu-icon-close"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="hidden"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE & TABLET COLLAPSIBLE MENU PANEL (< lg) -->
+  <div
+    id="mobile-menu-panel"
+    aria-label="Mobile Navigation"
+    class="hidden lg:hidden border-t-2 border-[#ADC4CE] dark:border-[#222D35] bg-[#F1F0E8] dark:bg-[#182026] px-4 py-4 shadow-xl"
+  >
+    <div class="flex flex-col gap-3 max-w-md mx-auto">
+      <!-- Language Selector inside Mobile Menu -->
+      <div class="relative flex items-center justify-between px-4 py-3 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] font-bold text-sm">
+        <div class="flex items-center gap-2.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
+          </svg>
+          <span data-i18n="nav_lang_label">Select Language</span>
+        </div>
+        <select
+          id="mobile-language-select"
+          aria-label="Select Language"
+          class="lang-select-control bg-transparent font-extrabold text-right focus:outline-none cursor-pointer"
+        >
+          {
+            SUPPORTED_LANGUAGES.map((lang) => (
+              <option value={lang.code} class="bg-[#F1F0E8] dark:bg-[#222D35] text-[#1E293B] dark:text-[#F1F0E8]">
+                {lang.name}
+              </option>
+            ))
+          }
+        </select>
+      </div>
+
+      <!-- Add to Home Screen (PWA) -->
+      <button
+        type="button"
+        aria-label="Add to Home Screen (Install Offline App)"
+        class="pwa-install-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#96B6C5] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] font-bold text-sm transition-colors"
+      >
+        <span class="flex items-center gap-2.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+            <path d="M12 18h.01" />
+            <path d="M12 8v6" />
+            <path d="m9 11 3 3 3-3" />
+          </svg>
+          <span data-i18n="nav_install_pwa">Add to Home Screen</span>
+        </span>
+        <span class="text-xs font-extrabold px-2 py-0.5 rounded bg-[#96B6C5] text-[#1E293B]">PWA</span>
+      </button>
+
+      <!-- Support the Developer -->
+      <a
+        href="https://kisharadilshan.gumroad.com/coffee"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Support the Developer on Gumroad"
+        class="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-[#96B6C5] hover:bg-[#ADC4CE] border-2 border-[#1E293B]/20 text-[#1E293B] font-extrabold text-sm transition-colors"
+      >
+        <span class="flex items-center gap-2.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M10 2v2" />
+            <path d="M14 2v2" />
+            <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
+            <path d="M6 2v2" />
+          </svg>
+          <span data-i18n="nav_support">Support the Developer</span>
+        </span>
+        <span>☕</span>
+      </a>
+
+      <!-- Bottom Row: Theme Toggle + GitHub Icon -->
+      <div class="grid grid-cols-2 gap-3 pt-1">
+        <button
+          type="button"
+          aria-label="Toggle Light or Dark Mode"
+          class="theme-toggle-trigger flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#96B6C5] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] font-bold text-sm transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="hidden dark:block shrink-0"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="block dark:hidden shrink-0"
+            aria-hidden="true"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+          <span data-i18n="nav_theme_toggle" class="truncate">Theme</span>
+        </button>
+
+        <a
+          href="https://github.com/rotatevideo/rotatevideo.github.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View RotateVideo Source Code on GitHub"
+          class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#96B6C5] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] font-bold text-sm transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="shrink-0"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+            />
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,803 @@
+---
+---
+
+<section
+  id="workspace"
+  aria-labelledby="hero-heading"
+  class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-12 sm:pb-16"
+>
+  <!-- Clean Hero Heading (Red-circled top breadcrumb & badge removed) -->
+  <div class="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+    <h1
+      id="hero-heading"
+      class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#1E293B] dark:text-[#F1F0E8] leading-[1.08] mb-3"
+      data-i18n="hero_title"
+    >
+      Rotate Video Online Free
+    </h1>
+
+    <p
+      class="text-base sm:text-xl font-medium text-[#1E293B]/85 dark:text-[#F1F0E8]/85 leading-relaxed"
+      data-i18n="hero_subtitle"
+    >
+      Fix sideways or upside-down MP4, WebM, MOV, and MKV videos instantly in your browser with zero quality loss.
+    </p>
+  </div>
+
+  <!-- MAIN PROMINENT ROUNDED WORKSPACE BOX (First Fold Focus) -->
+  <div
+    class="rounded-[2rem] bg-[#EEE0C9] dark:bg-[#222D35] border-2 sm:border-4 border-[#ADC4CE] shadow-xl p-5 sm:p-8 lg:p-10 transition-colors duration-200"
+  >
+    <!-- Hidden File Input -->
+    <input
+      type="file"
+      id="video-file-input"
+      accept="video/mp4,video/webm,video/quicktime,video/x-matroska,.mp4,.webm,.mov,.mkv,video/*"
+      class="sr-only"
+      aria-label="Choose video file to rotate (MP4, WebM, MOV, MKV)"
+    />
+
+    <!-- INITIAL SCREEN: UPLOADING BOX ONLY -->
+    <div
+      id="dropzone-area"
+      role="region"
+      aria-label="Video File Dropzone"
+      class="relative flex flex-col items-center justify-center text-center rounded-3xl bg-[#F1F0E8] dark:bg-[#182026] border-4 border-dashed border-[#96B6C5] hover:border-[#1E293B] dark:hover:border-[#ADC4CE] p-8 sm:p-14 transition-all duration-200 cursor-pointer"
+    >
+      <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-[#96B6C5] border-2 border-[#1E293B] flex items-center justify-center mb-5 shadow-md">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#1E293B"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" x2="12" y1="3" y2="15" />
+        </svg>
+      </div>
+
+      <h2
+        class="text-2xl sm:text-3xl font-black text-[#1E293B] dark:text-[#F1F0E8] mb-2"
+        data-i18n="drop_title"
+      >
+        Drop your video here or click to browse
+      </h2>
+
+      <p
+        class="text-sm sm:text-lg font-medium text-[#1E293B]/75 dark:text-[#F1F0E8]/75 mb-7"
+        data-i18n="drop_subtitle"
+      >
+        Supports MP4, WebM, MOV, MKV · Processed 100% on your device
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <button
+          type="button"
+          id="choose-file-btn"
+          aria-label="Choose Video File from Device"
+          class="inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-[#96B6C5] hover:bg-[#ADC4CE] text-[#1E293B] font-black text-lg sm:text-xl border-2 border-[#1E293B] shadow-md transition-transform active:scale-95"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m22 8-6 4 6 4V8Z" />
+            <rect width="14" height="12" x="2" y="6" rx="2" ry="2" />
+          </svg>
+          <span data-i18n="choose_file_btn">Choose Video File</span>
+        </button>
+
+        <button
+          type="button"
+          id="load-sample-btn"
+          aria-label="Load Sample Video to Test Rotation"
+          class="inline-flex items-center gap-2.5 px-6 py-4 rounded-2xl bg-[#EEE0C9] dark:bg-[#222D35] hover:bg-[#ADC4CE] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] text-[#1E293B] dark:text-[#F1F0E8] font-extrabold text-base sm:text-lg border-2 border-[#ADC4CE] transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <span data-i18n="sample_video_btn">Load Sample Video</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- POST-UPLOAD SCREEN: LIVE VIDEO PREVIEW + ROTATING CONFIGURATION (Hidden initially until video is uploaded) -->
+    <div id="editor-workspace" class="hidden space-y-6">
+      <!-- Live Video Preview Stage (Hardware-Accelerated CSS Transform) -->
+      <div
+        id="preview-container"
+        class="relative w-full h-[280px] sm:h-[400px] rounded-3xl bg-[#182026] border-2 border-[#ADC4CE] overflow-hidden flex items-center justify-center p-4"
+      >
+        <video
+          id="video-preview"
+          controls
+          playsinline
+          loop
+          class="max-w-full max-h-full rounded-xl shadow-lg transition-transform duration-500 ease-out"
+        ></video>
+
+        <!-- Live Orientation Badge Overlay -->
+        <div class="absolute top-3 left-3 flex flex-wrap items-center gap-2 pointer-events-none">
+          <span
+            id="transform-badge"
+            class="px-3.5 py-1.5 rounded-xl bg-[#96B6C5] text-[#1E293B] font-black text-xs sm:text-sm shadow"
+          >
+            0° · Original
+          </span>
+          <span
+            id="file-info-badge"
+            class="px-3 py-1.5 rounded-xl bg-[#F1F0E8]/90 text-[#1E293B] font-bold text-xs shadow truncate max-w-[180px] sm:max-w-xs"
+          >
+            video.mp4
+          </span>
+        </div>
+
+        <!-- Change Video Button Overlay -->
+        <button
+          type="button"
+          id="change-video-btn"
+          aria-label="Choose Another Video File"
+          class="absolute top-3 right-3 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#EEE0C9] hover:bg-[#96B6C5] text-[#1E293B] font-extrabold text-xs sm:text-sm border border-[#1E293B] shadow transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" x2="12" y1="3" y2="15" />
+          </svg>
+          <span data-i18n="change_video_btn">Choose Another Video</span>
+        </button>
+      </div>
+
+      <!-- OVERSIZED ROTATION & FLIP BUTTONS -->
+      <div
+        role="group"
+        aria-label="Video Rotation and Flip Controls"
+        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4"
+      >
+        <!-- Rotate 90° Left (CCW) -->
+        <button
+          type="button"
+          id="btn-rotate-left"
+          aria-label="Rotate Video 90 Degrees Counter-Clockwise (Left)"
+          class="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#F1F0E8] dark:bg-[#182026] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] hover:border-[#1E293B] text-[#1E293B] dark:text-[#F1F0E8] font-extrabold text-sm sm:text-base transition-all active:scale-95 shadow-sm group"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:-rotate-90 transition-transform duration-300"
+            aria-hidden="true"
+          >
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+          <span data-i18n="rotate_left_90">Rotate 90° Left</span>
+        </button>
+
+        <!-- Rotate 90° Right (CW) -->
+        <button
+          type="button"
+          id="btn-rotate-right"
+          aria-label="Rotate Video 90 Degrees Clockwise (Right)"
+          class="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#F1F0E8] dark:bg-[#182026] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] hover:border-[#1E293B] text-[#1E293B] dark:text-[#F1F0E8] font-extrabold text-sm sm:text-base transition-all active:scale-95 shadow-sm group"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:rotate-90 transition-transform duration-300"
+            aria-hidden="true"
+          >
+            <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+          </svg>
+          <span data-i18n="rotate_right_90">Rotate 90° Right</span>
+        </button>
+
+        <!-- Rotate 180° -->
+        <button
+          type="button"
+          id="btn-rotate-180"
+          aria-label="Rotate Video 180 Degrees Upside-Down"
+          class="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#F1F0E8] dark:bg-[#182026] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] hover:border-[#1E293B] text-[#1E293B] dark:text-[#F1F0E8] font-extrabold text-sm sm:text-base transition-all active:scale-95 shadow-sm group"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:rotate-180 transition-transform duration-500"
+            aria-hidden="true"
+          >
+            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+            <path d="M16 16h5v5" />
+          </svg>
+          <span data-i18n="rotate_180">Rotate 180°</span>
+        </button>
+
+        <!-- Flip Horizontal (Mirror) -->
+        <button
+          type="button"
+          id="btn-flip-h"
+          aria-label="Flip Video Horizontally (Mirror Left to Right)"
+          aria-pressed="false"
+          class="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#F1F0E8] dark:bg-[#182026] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] hover:border-[#1E293B] text-[#1E293B] dark:text-[#F1F0E8] font-extrabold text-sm sm:text-base transition-all active:scale-95 shadow-sm"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
+            <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+            <path d="M12 20v2" />
+            <path d="M12 14v2" />
+            <path d="M12 8v2" />
+            <path d="M12 2v2" />
+          </svg>
+          <span data-i18n="flip_horizontal">Flip Horizontal</span>
+        </button>
+
+        <!-- Flip Vertical -->
+        <button
+          type="button"
+          id="btn-flip-v"
+          aria-label="Flip Video Vertically (Mirror Top to Bottom)"
+          aria-pressed="false"
+          class="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#F1F0E8] dark:bg-[#182026] hover:bg-[#96B6C5] dark:hover:bg-[#96B6C5] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] hover:border-[#1E293B] text-[#1E293B] dark:text-[#F1F0E8] font-extrabold text-sm sm:text-base transition-all active:scale-95 shadow-sm"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3" />
+            <path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3" />
+            <path d="M4 12H2" />
+            <path d="M10 12H8" />
+            <path d="M16 12h-2" />
+            <path d="M22 12h-2" />
+          </svg>
+          <span data-i18n="flip_vertical">Flip Vertical</span>
+        </button>
+
+        <!-- Reset -->
+        <button
+          type="button"
+          id="btn-reset"
+          aria-label="Reset Video Orientation to Original"
+          class="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#F1F0E8] dark:bg-[#182026] hover:bg-[#ADC4CE] dark:hover:bg-[#ADC4CE] dark:hover:text-[#1E293B] border-2 border-[#ADC4CE] text-[#1E293B] dark:text-[#F1F0E8] font-extrabold text-sm sm:text-base transition-all active:scale-95 shadow-sm"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+            <line x1="12" x2="12" y1="8" y2="12" />
+            <line x1="12" x2="15" y1="12" y2="12" />
+          </svg>
+          <span data-i18n="reset_btn">Reset</span>
+        </button>
+      </div>
+
+      <!-- EXPORT ENGINE MODE + BIG DOWNLOAD BUTTON -->
+      <div class="pt-2 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        <!-- Engine Mode Selector (Defaults to Universal Pixel Re-Encode so downloaded video is genuinely rotated in all players) -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 bg-[#F1F0E8] dark:bg-[#182026] px-4 py-3 rounded-2xl border-2 border-[#ADC4CE]">
+          <label
+            for="engine-mode-select"
+            class="text-xs sm:text-sm font-extrabold text-[#1E293B] dark:text-[#F1F0E8] whitespace-nowrap"
+            data-i18n="mode_label"
+          >
+            Export Engine:
+          </label>
+          <select
+            id="engine-mode-select"
+            aria-label="Select Video Export Processing Engine"
+            class="bg-transparent text-xs sm:text-sm font-bold text-[#1E293B] dark:text-[#F1F0E8] focus:outline-none cursor-pointer"
+          >
+            <option value="reencode" selected class="bg-[#F1F0E8] dark:bg-[#222D35]" data-i18n="mode_reencode">
+              Universal Pixel Re-Encode (Bakes Flips &amp; Rotation)
+            </option>
+            <option value="lossless" class="bg-[#F1F0E8] dark:bg-[#222D35]" data-i18n="mode_lossless">
+              Smart Lossless Metadata (MP4/MOV Header Only)
+            </option>
+          </select>
+        </div>
+
+        <!-- Big Download Button -->
+        <button
+          type="button"
+          id="download-video-btn"
+          aria-label="Download Rotated Video Instantly"
+          class="flex-1 lg:max-w-md inline-flex items-center justify-center gap-3 px-8 py-4 sm:py-5 rounded-2xl bg-[#96B6C5] hover:bg-[#ADC4CE] text-[#1E293B] font-black text-lg sm:text-xl border-2 border-[#1E293B] shadow-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" x2="12" y1="15" y2="3" />
+          </svg>
+          <span data-i18n="download_btn">Download Rotated Video</span>
+        </button>
+      </div>
+
+      <!-- Progress Bar & Accessible Live Status Region -->
+      <div id="progress-wrapper" class="hidden space-y-2">
+        <div class="w-full h-3.5 rounded-full bg-[#F1F0E8] dark:bg-[#182026] overflow-hidden border border-[#ADC4CE]">
+          <div
+            id="progress-bar"
+            class="h-full bg-[#96B6C5] transition-all duration-150"
+            style="width: 0%"
+          ></div>
+        </div>
+      </div>
+
+      <p
+        id="status-message"
+        role="status"
+        aria-live="polite"
+        class="text-center text-sm sm:text-base font-bold text-[#1E293B] dark:text-[#F1F0E8] min-h-[1.5rem]"
+      ></p>
+    </div>
+
+    <!-- Trust & Capability Pills Footer inside Box -->
+    <div class="mt-6 pt-5 border-t-2 border-[#ADC4CE]/60 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-bold text-[#1E293B]/80 dark:text-[#F1F0E8]/80">
+      <div class="inline-flex items-center gap-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        <span data-i18n="privacy_pill">100% Private (No Uploads)</span>
+      </div>
+      <div class="inline-flex items-center gap-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+        <span>MP4 · WebM · MOV · MKV</span>
+      </div>
+      <div class="inline-flex items-center gap-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+        <span data-i18n="offline_pill">Works Offline (PWA)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { TRANSLATIONS, SUPPORTED_LANGUAGES, type LanguageOption } from '../i18n/translations';
+  import {
+    processVideoClientSide,
+    generateSampleVideoFile,
+    type RotationConfig,
+  } from '../utils/videoEngine';
+
+  // --- 0. MOBILE & TABLET NAVBAR TOGGLE ICON CONTROLLER ---
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+  const mobileIconOpen = document.getElementById('mobile-menu-icon-open');
+  const mobileIconClose = document.getElementById('mobile-menu-icon-close');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    const isHidden = mobileMenuPanel?.classList.toggle('hidden');
+    const expanded = !isHidden;
+    mobileMenuBtn.setAttribute('aria-expanded', String(expanded));
+    mobileIconOpen?.classList.toggle('hidden', expanded);
+    mobileIconClose?.classList.toggle('hidden', !expanded);
+  });
+
+  // --- 1. MULTI-LANGUAGE (8 LANGUAGES) CONTROLLER ---
+  const langSelects = document.querySelectorAll<HTMLSelectElement>('.lang-select-control');
+  const currentLangLabel = document.getElementById('current-lang-label');
+
+  function applyLanguage(code: LanguageOption['code']) {
+    const dict = TRANSLATIONS[code] || TRANSLATIONS.en;
+    document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n') as keyof typeof dict;
+      if (key && dict[key]) {
+        el.textContent = dict[key];
+      }
+    });
+    document.querySelectorAll<HTMLElement>('[data-i18n-title]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-title') as keyof typeof dict;
+      if (key && dict[key]) {
+        el.setAttribute('title', dict[key]);
+      }
+    });
+
+    const langObj = SUPPORTED_LANGUAGES.find((l) => l.code === code);
+    if (currentLangLabel && langObj) {
+      currentLangLabel.textContent = langObj.nativeName;
+    }
+    langSelects.forEach((sel) => {
+      sel.value = code;
+    });
+    try {
+      localStorage.setItem('rotatevideo_lang', code);
+    } catch {}
+  }
+
+  const savedLang = (() => {
+    try {
+      return localStorage.getItem('rotatevideo_lang') as LanguageOption['code'] | null;
+    } catch {
+      return null;
+    }
+  })();
+
+  if (savedLang && TRANSLATIONS[savedLang]) {
+    applyLanguage(savedLang);
+  } else {
+    const browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase() as LanguageOption['code'];
+    applyLanguage(TRANSLATIONS[browserLang] ? browserLang : 'en');
+  }
+
+  langSelects.forEach((sel) => {
+    sel.addEventListener('change', (e) => {
+      const code = (e.target as HTMLSelectElement).value as LanguageOption['code'];
+      applyLanguage(code);
+    });
+  });
+
+  // --- 2. LIGHT / DARK THEME TOGGLE ---
+  const themeBtns = document.querySelectorAll('.theme-toggle-trigger');
+  themeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      const metaTheme = document.getElementById('meta-theme-color');
+      if (metaTheme) {
+        metaTheme.setAttribute('content', isDark ? '#182026' : '#F1F0E8');
+      }
+      try {
+        localStorage.setItem('rotatevideo_theme', isDark ? 'dark' : 'light');
+      } catch {}
+    });
+  });
+
+  // --- 3. OFFLINE PWA ('Add to Home Screen') CONTROLLER ---
+  let deferredInstallPrompt: any = null;
+  const pwaInstallBtns = document.querySelectorAll('.pwa-install-trigger');
+  const pwaModal = document.getElementById('pwa-modal');
+  const pwaCloseIcon = document.getElementById('pwa-modal-close-icon');
+  const pwaCloseBtn = document.getElementById('pwa-modal-close-btn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+  });
+
+  pwaInstallBtns.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+      } else if (pwaModal) {
+        pwaModal.classList.remove('hidden');
+        pwaModal.classList.add('flex');
+      }
+    });
+  });
+
+  function closePwaModal() {
+    if (pwaModal) {
+      pwaModal.classList.add('hidden');
+      pwaModal.classList.remove('flex');
+    }
+  }
+  pwaCloseIcon?.addEventListener('click', closePwaModal);
+  pwaCloseBtn?.addEventListener('click', closePwaModal);
+  pwaModal?.addEventListener('click', (e) => {
+    if (e.target === pwaModal) closePwaModal();
+  });
+
+  // --- 4. VIDEO ROTATOR & LIVE ANIMATED PREVIEW ENGINE ---
+  let currentFile: File | null = null;
+  let currentObjectUrl: string | null = null;
+  let visualAngle = 0; // Unwrapped angle for smooth cumulative CSS transitions
+  let flipH = false;
+  let flipV = false;
+
+  const fileInput = document.getElementById('video-file-input') as HTMLInputElement | null;
+  const dropzoneArea = document.getElementById('dropzone-area');
+  const editorWorkspace = document.getElementById('editor-workspace');
+  const chooseFileBtn = document.getElementById('choose-file-btn');
+  const loadSampleBtn = document.getElementById('load-sample-btn');
+  const changeVideoBtn = document.getElementById('change-video-btn');
+  const videoPreview = document.getElementById('video-preview') as HTMLVideoElement | null;
+  const transformBadge = document.getElementById('transform-badge');
+  const fileInfoBadge = document.getElementById('file-info-badge');
+  const statusMessage = document.getElementById('status-message');
+  const progressWrapper = document.getElementById('progress-wrapper');
+  const progressBar = document.getElementById('progress-bar');
+  const engineModeSelect = document.getElementById('engine-mode-select') as HTMLSelectElement | null;
+  const downloadBtn = document.getElementById('download-video-btn') as HTMLButtonElement | null;
+
+  const btnRotateLeft = document.getElementById('btn-rotate-left');
+  const btnRotateRight = document.getElementById('btn-rotate-right');
+  const btnRotate180 = document.getElementById('btn-rotate-180');
+  const btnFlipH = document.getElementById('btn-flip-h');
+  const btnFlipV = document.getElementById('btn-flip-v');
+  const btnReset = document.getElementById('btn-reset');
+
+  function getNormalizedAngle(): 0 | 90 | 180 | 270 {
+    const mod = ((visualAngle % 360) + 360) % 360;
+    if (mod === 90 || mod === 180 || mod === 270) return mod;
+    return 0;
+  }
+
+  function updateVisualTransform() {
+    if (!videoPreview) return;
+    const normAngle = getNormalizedAngle();
+    const isSideways = normAngle === 90 || normAngle === 270;
+    const fitScale = isSideways ? 0.68 : 1;
+    const sx = (flipH ? -1 : 1) * fitScale;
+    const sy = (flipV ? -1 : 1) * fitScale;
+
+    videoPreview.style.transform = `rotate(${visualAngle}deg) scale(${sx}, ${sy})`;
+
+    if (transformBadge) {
+      const parts: string[] = [`${normAngle}°`];
+      if (flipH) parts.push('Flip H');
+      if (flipV) parts.push('Flip V');
+      if (normAngle === 0 && !flipH && !flipV) parts.push('Original');
+      transformBadge.textContent = parts.join(' · ');
+    }
+
+    btnFlipH?.setAttribute('aria-pressed', String(flipH));
+    btnFlipV?.setAttribute('aria-pressed', String(flipV));
+  }
+
+  function loadVideoFile(file: File) {
+    currentFile = file;
+    if (currentObjectUrl) {
+      URL.revokeObjectURL(currentObjectUrl);
+    }
+    currentObjectUrl = URL.createObjectURL(file);
+
+    visualAngle = 0;
+    flipH = false;
+    flipV = false;
+    updateVisualTransform();
+
+    if (videoPreview) {
+      videoPreview.src = currentObjectUrl;
+      videoPreview.play().catch(() => {});
+    }
+    if (fileInfoBadge) {
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+      fileInfoBadge.textContent = `${file.name} (${sizeMb} MB)`;
+    }
+
+    // Hide initial upload box and reveal rotating configuration workspace
+    dropzoneArea?.classList.add('hidden');
+    editorWorkspace?.classList.remove('hidden');
+    if (statusMessage) statusMessage.textContent = '';
+  }
+
+  // Trigger file browser
+  chooseFileBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fileInput?.click();
+  });
+  dropzoneArea?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('#load-sample-btn')) return;
+    fileInput?.click();
+  });
+  changeVideoBtn?.addEventListener('click', () => {
+    if (fileInput) {
+      fileInput.value = '';
+      fileInput.click();
+    }
+  });
+
+  fileInput?.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (file) loadVideoFile(file);
+  });
+
+  // Drag & Drop handlers
+  dropzoneArea?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzoneArea.classList.add('ring-4', 'ring-[#96B6C5]');
+  });
+  dropzoneArea?.addEventListener('dragleave', () => {
+    dropzoneArea.classList.remove('ring-4', 'ring-[#96B6C5]');
+  });
+  dropzoneArea?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzoneArea.classList.remove('ring-4', 'ring-[#96B6C5]');
+    const file = e.dataTransfer?.files?.[0];
+    if (file) loadVideoFile(file);
+  });
+
+  // Load Sample Video Button
+  loadSampleBtn?.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const sampleFile = await generateSampleVideoFile();
+    loadVideoFile(sampleFile);
+  });
+
+  // Rotation & Flip button handlers
+  btnRotateLeft?.addEventListener('click', () => {
+    visualAngle -= 90;
+    updateVisualTransform();
+  });
+
+  btnRotateRight?.addEventListener('click', () => {
+    visualAngle += 90;
+    updateVisualTransform();
+  });
+
+  btnRotate180?.addEventListener('click', () => {
+    visualAngle += 180;
+    updateVisualTransform();
+  });
+
+  btnFlipH?.addEventListener('click', () => {
+    flipH = !flipH;
+    updateVisualTransform();
+  });
+
+  btnFlipV?.addEventListener('click', () => {
+    flipV = !flipV;
+    updateVisualTransform();
+  });
+
+  btnReset?.addEventListener('click', () => {
+    visualAngle = 0;
+    flipH = false;
+    flipV = false;
+    updateVisualTransform();
+  });
+
+  // Download Rotated Video
+  downloadBtn?.addEventListener('click', async () => {
+    if (!currentFile) return;
+
+    // If user clicked Download before choosing any rotation or flip, default to 90° Right so it rotates
+    if (getNormalizedAngle() === 0 && !flipH && !flipV) {
+      visualAngle += 90;
+      updateVisualTransform();
+    }
+
+    const activeSelect = langSelects[0];
+    const currentLang = (activeSelect?.value as LanguageOption['code']) || 'en';
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+
+    downloadBtn.disabled = true;
+    progressWrapper?.classList.remove('hidden');
+    if (progressBar) progressBar.style.width = '5%';
+    if (statusMessage) statusMessage.textContent = `${dict.processing_msg} (0%)`;
+
+    try {
+      const config: RotationConfig = {
+        angle: getNormalizedAngle(),
+        flipH,
+        flipV,
+        mode: (engineModeSelect?.value as 'reencode' | 'lossless') || 'reencode',
+      };
+
+      const result = await processVideoClientSide(currentFile, config, (pct) => {
+        if (progressBar) progressBar.style.width = `${pct}%`;
+        if (statusMessage) statusMessage.textContent = `${dict.processing_msg} (${pct}%)`;
+      });
+
+      const downloadUrl = URL.createObjectURL(result.blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = result.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(downloadUrl), 8000);
+
+      if (statusMessage) {
+        statusMessage.textContent = `${dict.ready_msg}`;
+      }
+    } catch (err) {
+      if (statusMessage) {
+        statusMessage.textContent =
+          err instanceof Error ? err.message : 'Error rotating video file.';
+      }
+    } finally {
+      downloadBtn.disabled = false;
+      setTimeout(() => {
+        progressWrapper?.classList.add('hidden');
+      }, 1500);
+    }
+  });
+</script>
